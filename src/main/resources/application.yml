@@ -1,3 +1,12 @@
-mail:
-  user: someUser@someEmail
-  password: somePassword
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: user.to.login@gmail.com
+    password: passwordhere
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
