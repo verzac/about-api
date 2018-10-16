@@ -10,7 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.Properties;
 
 @Service
-public class ContactMeService {
+public class MailService {
+
+    @Value("${mail.user}")
+    private String userName;
+
+    @Value("${mail.password}")
+    private String password;
 
     @Bean
     public JavaMailSender getJavaMailSender() {
@@ -18,8 +24,8 @@ public class ContactMeService {
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
 
-        mailSender.setUsername("benjamin.tanone@gmail.com");
-        mailSender.setPassword("Heinzekel1!");
+        mailSender.setUsername(userName);
+        mailSender.setPassword(password);
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
@@ -30,7 +36,7 @@ public class ContactMeService {
         return mailSender;
     }
 
-    public ContactMeService() {
+    public MailService() {
 
     }
 }
