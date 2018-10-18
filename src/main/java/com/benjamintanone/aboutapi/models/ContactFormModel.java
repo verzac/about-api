@@ -18,4 +18,9 @@ public class ContactFormModel {
     private String firstName;
     @NotNull
     private String lastName;
+
+    public String toString() {
+        return String.format("EMAIL:\n%s\n\nFIRST NAME:\n%s\n\nLAST NAME:\n%s\n\nMESSAGE:\n%s\n\nREASON:\n%s\n",
+                this.email, this.firstName, this.lastName, this.message, this.reason);
+    }
 }

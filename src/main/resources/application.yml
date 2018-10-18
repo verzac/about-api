@@ -1,3 +1,6 @@
+form:
+  mail:
+    to: benjamin.tanone@gmail.com
 spring:
   mail:
     host: smtp.gmail.com
@@ -10,3 +13,4 @@ spring:
           auth: true
           starttls:
             enable: true
+  profiles.active: local
