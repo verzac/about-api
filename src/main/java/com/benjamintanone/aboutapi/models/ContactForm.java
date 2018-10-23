@@ -2,20 +2,25 @@ package com.benjamintanone.aboutapi.models;
 
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.data.redis.core.index.Indexed;
 
 import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
-public class ContactFormModel {
+public class ContactForm {
     @NotNull
+    @Indexed
     private String email;
+
     @NotNull
     private String message;
     @NotNull
     private String reason;
     @NotNull
     private String firstName;
+
+    @Indexed
     @NotNull
     private String lastName;
 

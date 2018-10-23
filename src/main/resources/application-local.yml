@@ -1,3 +1,7 @@
+form:
+  mail:
+    to: benjamin.tanone@gmail.com
+    subject_prefix: "[Contact Form API - LOCAL]"
 spring:
   mail:
     host: smtp.gmail.com
