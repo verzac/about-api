@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Stream;
 
 @RestController
 @Slf4j
@@ -50,8 +51,9 @@ public class ContactMeController {
     private RandomizerService randomizerService;
 
     @GetMapping("/")
-    public String helloWorld() {
-        return "Hello world!";
+    public SimpleResponse helloWorld() {
+        CompletableFuture.runAsync(() -> log.error("HELLO THERE FROM ASYNC METHOD"));
+        return SimpleResponse.builder().message("Hey there!").build();
     }
 
     @PostMapping("/simple")
@@ -82,12 +84,13 @@ public class ContactMeController {
         if (sessions.size() > 1) {
             throw new DataIntegrityException("Detected more than one session with the same challenge!");
         } else if (sessions.size() == 0) {
-            throw new BadRequestException("No sessions detected with that challenge!");
+            throw new BadRequestException(String.format("No sessions detected with challenge %s", challenge));
         }
         ContactForm formToBeSent = sessions.get(0).getContactForm();
-        mailService.sendMessageTo(destinationEmail,
+        CompletableFuture mailFuture = mailService.sendMessageTo(destinationEmail,
                 "Message from " + formToBeSent.getFirstName() + " " + formToBeSent.getLastName(),
                 formToBeSent.toString());
-        sessionRepository.delete(sessions.get(0));
+        CompletableFuture repoFuture = CompletableFuture.runAsync(() -> sessionRepository.delete(sessions.get(0)));
+        CompletableFuture.allOf(mailFuture, repoFuture).join();
     }
 }

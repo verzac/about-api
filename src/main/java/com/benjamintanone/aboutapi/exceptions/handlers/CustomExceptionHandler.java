@@ -14,7 +14,7 @@ public class CustomExceptionHandler {
     @ExceptionHandler(value = {BadRequestException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public SimpleResponse handleBadRequestException(Exception exception) {
-        log.error(exception.getMessage(), exception);
+        log.error(exception.getMessage());
         return SimpleResponse.builder()
                 .message(exception.getMessage())
                 .status(400)
