@@ -5,7 +5,7 @@ branches:
   only:
     - master
 before_install:
-  - chmod -x ./gradlew
+  - chmod -x gradlew
 deploy:
   skip_cleanup: true
   provider: elasticbeanstalk
