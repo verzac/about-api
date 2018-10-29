@@ -4,6 +4,7 @@ branches:
   only:
     - master
 deploy:
+  skip_cleanup: true
   provider: elasticbeanstalk
   access_key_id:
     secure: "M8gTU/lIjdEJTDKzwm/ZNYwfA6DjFaXhn78V5N9ldyrZ99JADD6/92Ls42/i9uRK6eX+JIZFnoMqCwCf7ZIONxhreh0ICFWZyvNM2GDZLcR0/PNTxdT2nqVCsSn9P1osaQTsNwhte57m+wUITklWxRlncU5PzNeAN19jrDcw1FaPtD9k/WXQg7Jegv/os86f69A0hbb/FKfG5JJ2k5kbF4VJM7pNBQMrP/RcpUlt2RzYXCdgB/64q29wvpfOupjLIq+Zdq926othXxVSfzMQ+Eji2D6F0yv7QpKYJtn5QHTAwyvEvJ3GdmCakv1+/R+h6FEYSWULa5LKfTC5JCiXW25qO1td32XQg1VB5j9hn7QujhM2v2FOLqJfMkQHflq9fQEqz8VwoVFJWl+IEauIBlaL2Z+jsXKb7vCJaFd0c/XjcdRAppf3TDyLY5SqVtDsN2q7B0uDepGmILCXAMvh3Z+MgAK3QN4zi6pLwpxXRE08OlP3Tt1wT8xK+MakxVQE7iAK9T42jZ/2OQ50eUS4UvU/aCf66QyfRisaTlOHHqv1HNCW6gXdqA66VJC13H0mMQqiHDkforrNYo1lWRs0N15ixcRm8OG2CbzZedRwec1Y+XNCPBb7dplz3RdSDzlmYi7EyHqmRwQ/5tmKjYI71YVxkV0TB529w5eC6NfheQI="
