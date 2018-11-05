@@ -14,4 +14,4 @@ deploy:
   app: "about-api-prod"
   env: "AboutApiProd-env-1"
   bucket_name: "about-api-artefact"
-  zip_file: "./"
+  zip_file: "./*"
