@@ -3,6 +3,9 @@ jdk: oraclejdk8
 branches:
   only:
     - master
+before_deploy:
+  - zip -r deploy.zip build/libs  # because build is in gitignore, so travis will ignore this
+  - zip deploy.zip Procfile
 deploy:
   skip_cleanup: true
   provider: elasticbeanstalk
@@ -14,4 +17,4 @@ deploy:
   app: "about-api-prod"
   env: "AboutApiProd-env-1"
   bucket_name: "about-api-artefact"
-  zip_file: "./*"
+  zip_file: "deploy.zip"
