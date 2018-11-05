@@ -14,4 +14,3 @@ deploy:
   app: "about-api-prod"
   env: "AboutApiProd-env"
   bucket_name: "about-api-artefact"
-  zip_file: "./build/libs/about-api-0.0.1-SNAPSHOT.jar"

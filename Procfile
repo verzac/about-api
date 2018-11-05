@@ -1,0 +1,1 @@
+web: java -Dspring.profiles.active=beanstalk -jar build/libs/about-api-*.jar
