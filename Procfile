@@ -1,1 +1,1 @@
-web: java -Dspring.profiles.active=beanstalk -jar about-api-*.jar
+web: java -Dspring.profiles.active=beanstalk -jar target.jar

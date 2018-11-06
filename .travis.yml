@@ -4,7 +4,8 @@ branches:
   only:
     - master
 before_deploy:
-  - zip -j deploy.zip build/libs/*.jar  # because build is in gitignore, so travis will ignore this
+  - mv build/libs/*.jar target.jar
+  - zip -j deploy.zip target.jar  # because build is in gitignore, so travis will ignore this
   - zip deploy.zip Procfile
 deploy:
   skip_cleanup: true
