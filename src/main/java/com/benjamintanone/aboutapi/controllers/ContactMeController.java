@@ -19,18 +19,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import javax.websocket.server.PathParam;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Stream;
 
 @RestController
 @Slf4j
@@ -52,28 +46,20 @@ public class ContactMeController {
 
     @GetMapping("/")
     public SimpleResponse helloWorld() {
-        CompletableFuture.runAsync(() -> log.error("HELLO THERE FROM ASYNC METHOD"));
         return SimpleResponse.builder().message("Hey there!").build();
     }
 
-    @PostMapping("/simple")
-    public SimpleModel postSimpleModel(@Valid @RequestBody SimpleModel model) {
-        mailService.sendMessageTo("benjamin.tanone@gmail.com", "TEST SUBJECT", "HELLO THERE Wassup")
-                .join();
-        return model;
-    }
-
     @PostMapping("/contact")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public Session postContactForm(@Valid @RequestBody ContactForm contactForm) {
-        // mailService.sendMessageTo(destinationEmail, "Contact Form", contactForm.toString());
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void postContactForm(@Valid @RequestBody ContactForm contactForm) {
+        // mailService.sendSimpleMessageTo(destinationEmail, "Contact Form", contactForm.toString());
         String challengeToken = randomizerService.getNewChallengeToken();
         Session session = Session.builder()
                 .challenge(challengeToken)
                 .contactForm(contactForm)
                 .build();
+        mailService.sendConfirmationEmail(session).join(); // since this is the last thing anyways
         sessionRepository.save(session);
-        return session;
         // return SimpleResponse.builder().message("Contact form submitted. Please see email for confirmation.").build();
     }
 
@@ -87,7 +73,7 @@ public class ContactMeController {
             throw new BadRequestException(String.format("No sessions detected with challenge %s", challenge));
         }
         ContactForm formToBeSent = sessions.get(0).getContactForm();
-        CompletableFuture mailFuture = mailService.sendMessageTo(destinationEmail,
+        CompletableFuture mailFuture = mailService.sendSimpleMessageTo(destinationEmail,
                 "Message from " + formToBeSent.getFirstName() + " " + formToBeSent.getLastName(),
                 formToBeSent.toString());
         CompletableFuture repoFuture = CompletableFuture.runAsync(() -> sessionRepository.delete(sessions.get(0)));

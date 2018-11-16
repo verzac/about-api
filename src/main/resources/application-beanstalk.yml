@@ -3,7 +3,7 @@ server.port: 5000
 form:
   mail:
     to: ${TO_EMAIL}
-    subject_prefix: "[Contact Form API - PROD]"
+    subject_prefix: "[Contact Form API - about.benjamintanone.com]"
 spring:
   mail:
     host: ${MAIL_HOST}

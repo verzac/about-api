@@ -1,0 +1,52 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+        <style>
+            body, html {
+                font-family: 'Montserrat', sans-serif;
+                height: 100%;
+                text-align: center;
+                font-size: 18px;
+            }
+
+            h1, .subtitle {
+                font-size: 1.5em;
+            }
+
+            .title {
+                font-size: 5em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+
+            /*links*/
+            a {
+                text-decoration: none;
+                color: black;
+                opacity: 0.5;
+                transition: all 0.5s;
+            }
+
+            a:hover, a.active, a.clear {
+                opacity: 1;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="title">One More Step!</div>
+        <p>
+            Hi <span th:text="${firstName}"></span>! You've recently submitted a contact form on <a href="https://about.benjamintanone.com">https://about.benjamintanone.com</a>.
+        </p>
+        <p>
+            Please click the link below to confirm your submission:
+        </p>
+        <a th:href="'https://about.benjamintanone.com/contact-me/confirm/' + ${challenge}">
+            <span th:text="'https://about.benjamintanone.com/contact-me/confirm/' + ${challenge}"></span>
+        </a>
+        <p>
+            If you think this is a mistake, please ignore this message and your submission will be automatically deleted.
+        </p>
+    </body>
+</html>

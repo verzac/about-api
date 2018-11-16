@@ -30,5 +30,6 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-mail:${SpringBootVersion}")
 	implementation('org.projectlombok:lombok:1.16.22')
 	implementation("org.springframework.boot:spring-boot-starter-data-redis:${SpringBootVersion}")
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf:${SpringBootVersion}")
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
