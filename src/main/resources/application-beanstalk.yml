@@ -4,6 +4,10 @@ form:
   mail:
     to: ${TO_EMAIL}
     subject_prefix: "[Contact Form API - about.benjamintanone.com]"
+security:
+  cors:
+    allowed_origins:
+      - "https://about.benjamintanone.com"
 spring:
   mail:
     host: ${MAIL_HOST}

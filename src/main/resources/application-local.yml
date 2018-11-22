@@ -1,7 +1,11 @@
 form:
   mail:
-    to: benjamin.tanone@gmail.com
+    to: benjamin.tanone@gmail.com # REPLACE THIS
     subject_prefix: "[Contact Form API - LOCAL]"
+security:
+  cors:
+    allowed_origins:
+      - "http://localhost:4200"
 spring:
   mail:
     host: smtp.gmail.com
