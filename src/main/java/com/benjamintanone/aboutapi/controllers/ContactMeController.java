@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -63,9 +64,13 @@ public class ContactMeController {
         // return SimpleResponse.builder().message("Contact form submitted. Please see email for confirmation.").build();
     }
 
-    @PostMapping("/contact/confirm/{challengeId}")
+    @PostMapping("/contact/confirm")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void postContactFormConfirmation(@PathVariable("challengeId") String challenge) {
+    public void postContactFormConfirmation(@RequestBody @Valid Session session) {
+        String challenge = session.getChallenge();
+        if (challenge == null) {
+            throw new BadRequestException("Must include challenge token to confirm form submission.");
+        }
         List<Session> sessions = sessionRepository.findByChallenge(challenge);
         if (sessions.size() > 1) {
             throw new DataIntegrityException("Detected more than one session with the same challenge!");
