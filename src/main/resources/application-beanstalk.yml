@@ -9,6 +9,7 @@ security:
     allowed_origins:
       - "https://about.benjamintanone.com"
       - "http://staging.about.benjamintanone.com"
+      - "https://staging.about.benjamintanone.com"
 spring:
   mail:
     host: ${MAIL_HOST}
